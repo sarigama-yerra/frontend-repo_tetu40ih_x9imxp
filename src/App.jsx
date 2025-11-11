@@ -1,40 +1,51 @@
 import React from 'react'
-import Spline from '@splinetool/react-spline'
-import { ArrowRight, CheckCircle2, Shield, Zap, Wallet, LineChart, Cog, Sparkles, Menu } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowRight, Play, BookOpen, Mail, Github, Linkedin, Youtube, Twitter, Sparkles, Code2, Mic2, Newspaper, ChevronDown, Star, Quote } from 'lucide-react'
+
+// Variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: (i = 0) => ({ opacity: 1, y: 0, transition: { delay: i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] } })
+}
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
+}
 
 function Navbar() {
   const [open, setOpen] = React.useState(false)
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/60 border-b border-white/30">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500 shadow-md" />
-            <span className="text-lg font-semibold tracking-tight">RetraiteFlow</span>
+          <a href="#home" className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-500 shadow-md" />
+            <span className="text-lg font-semibold tracking-tight">Alex Marchand</span>
           </a>
           <nav className="hidden md:flex items-center gap-8 text-sm text-gray-700">
-            <a href="#features" className="hover:text-gray-900">Fonctionnalités</a>
-            <a href="#how" className="hover:text-gray-900">Comment ça marche</a>
-            <a href="#pricing" className="hover:text-gray-900">Tarifs</a>
-            <a href="#faq" className="hover:text-gray-900">FAQ</a>
+            <a href="#projects" className="hover:text-gray-900">Projets</a>
+            <a href="#courses" className="hover:text-gray-900">Formations</a>
+            <a href="#content" className="hover:text-gray-900">Contenu</a>
+            <a href="#about" className="hover:text-gray-900">À propos</a>
+            <a href="#contact" className="hover:text-gray-900">Contact</a>
           </nav>
           <div className="hidden md:flex items-center gap-3">
-            <a href="#pricing" className="px-4 py-2 text-gray-700 hover:text-gray-900">Se connecter</a>
-            <a href="#cta" className="px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-black transition-colors">Commencer</a>
+            <a href="#contact" className="px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-black transition-colors">Me contacter</a>
           </div>
           <button className="md:hidden p-2 rounded-lg border border-gray-200" onClick={() => setOpen(!open)} aria-label="Ouvrir le menu">
-            <Menu className="h-5 w-5" />
+            <ChevronDown className={`h-5 w-5 transition-transform ${open ? 'rotate-180' : ''}`} />
           </button>
         </div>
       </div>
       {open && (
-        <div className="md:hidden border-t border-white/40 bg-white/70 backdrop-blur">
+        <div className="md:hidden border-t border-white/40 bg-white/80 backdrop-blur">
           <div className="px-4 py-3 flex flex-col gap-3 text-sm">
-            <a href="#features" onClick={() => setOpen(false)} className="py-2">Fonctionnalités</a>
-            <a href="#how" onClick={() => setOpen(false)} className="py-2">Comment ça marche</a>
-            <a href="#pricing" onClick={() => setOpen(false)} className="py-2">Tarifs</a>
-            <a href="#faq" onClick={() => setOpen(false)} className="py-2">FAQ</a>
-            <a href="#cta" onClick={() => setOpen(false)} className="py-2 rounded-lg bg-gray-900 text-white text-center">Essayer gratuitement</a>
+            <a href="#projects" onClick={() => setOpen(false)} className="py-2">Projets</a>
+            <a href="#courses" onClick={() => setOpen(false)} className="py-2">Formations</a>
+            <a href="#content" onClick={() => setOpen(false)} className="py-2">Contenu</a>
+            <a href="#about" onClick={() => setOpen(false)} className="py-2">À propos</a>
+            <a href="#contact" onClick={() => setOpen(false)} className="py-2 rounded-lg bg-gray-900 text-white text-center">Contact</a>
           </div>
         </div>
       )}
@@ -44,195 +55,111 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative min-h-[92vh] w-full overflow-hidden flex items-center" id="home">
-      <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/41MGRk-UDPKO-l6W/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-      </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white/95" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-6 w-full pt-24">
-        <div className="lg:col-span-6 flex flex-col justify-center">
-          <div className="inline-flex items-center gap-2 text-xs font-medium bg-white/60 backdrop-blur px-3 py-1 rounded-full w-max border border-white/50 shadow-sm">
-            <Sparkles className="h-4 w-4 text-blue-600" />
-            <span>Automatisez la retraite. Accélérez la croissance.</span>
-          </div>
-          <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900">
-            La nouvelle façon d'automatiser la gestion de la retraite
-          </h1>
-          <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-xl">
-            RetraiteFlow unifie simulations, versements, conformité et reporting. Réduisez 80% des tâches manuelles grâce à des workflows sécurisés et assistés par l'IA.
-          </p>
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <a href="#cta" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gray-900 text-white hover:bg-black transition-colors">
-              Commencer l'essai gratuit
-              <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#features" className="inline-flex items-center justify-center px-5 py-3 rounded-lg border border-gray-200 bg-white/70 backdrop-blur hover:bg-white">
-              Voir les fonctionnalités
-            </a>
-          </div>
-          <div className="mt-6 flex items-center gap-4 text-sm text-gray-600">
-            <div className="flex items-center gap-1"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> Sans carte bancaire</div>
-            <div className="flex items-center gap-1"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> SOC 2 Type II</div>
-            <div className="flex items-center gap-1"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> 14 jours d'essai</div>
-          </div>
-        </div>
-        <div className="lg:col-span-6" />
+    <section id="home" className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-32 -left-32 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-indigo-500/30 via-violet-500/20 to-fuchsia-500/30 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 h-[28rem] w-[28rem] rounded-full bg-gradient-to-br from-sky-400/20 via-emerald-400/10 to-violet-400/20 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,0,0,0.04),transparent_60%)]" />
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0">
-        <LogosStrip />
-      </div>
-    </section>
-  )
-}
-
-function LogosStrip() {
-  const logos = ['Nova', 'Zenith', 'Orbit', 'Aperture', 'Vertex', 'Nimbus']
-  return (
-    <div className="w-full py-6 bg-white/80 backdrop-blur border-t border-white/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-xs uppercase tracking-wider text-gray-500 mb-3">Ils nous font confiance</div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
-          {logos.map((l) => (
-            <div key={l} className="text-center text-gray-400 font-semibold py-2 px-3 rounded-lg border border-gray-100 bg-white">{l}</div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function FeatureCard({ icon: Icon, title, desc }) {
-  return (
-    <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-all">
-      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-600 to-blue-500 text-white flex items-center justify-center shadow-md">
-        <Icon className="h-5 w-5" />
-      </div>
-      <h3 className="mt-4 text-lg font-semibold text-gray-900">{title}</h3>
-      <p className="mt-2 text-sm text-gray-600">{desc}</p>
-    </div>
-  )
-}
-
-function Features() {
-  const items = [
-    { icon: Wallet, title: 'Versements intelligents', desc: 'Générez, planifiez et suivez les versements de retraite en un clic.' },
-    { icon: LineChart, title: 'Prévisions en temps réel', desc: 'Simulez les scénarios de trésorerie et d’épargne avec l’IA.' },
-    { icon: Shield, title: 'Sécurité bancaire', desc: 'Chiffrement bout‑à‑bout, SSO, traçabilité et rôles granulaires.' },
-    { icon: Zap, title: 'Automatisation des workflows', desc: 'Automatisez validations, notifications et rapports réglementaires.' },
-    { icon: Cog, title: 'Intégrations rapides', desc: 'Connectez banques, ERP et paie en quelques minutes, sans code.' },
-    { icon: Sparkles, title: 'Copilotes IA', desc: 'L’IA prépare vos dossiers, détecte les anomalies et propose des actions.' },
-  ]
-  return (
-    <section id="features" className="relative py-20 bg-gradient-to-b from-white to-gray-50">
-      <div className="absolute inset-x-0 -top-24 h-24 bg-gradient-to-b from-white to-transparent pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">Tout pour piloter la retraite en automatique</h2>
-          <p className="mt-3 text-gray-600">Des bases solides, sécurisées par défaut et adaptées à votre écosystème.</p>
-        </div>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <FeatureCard key={item.title} {...item} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function HowItWorks() {
-  const steps = [
-    { title: 'Connectez vos comptes', desc: 'Banques, paie, ERP et prestataires en toute sécurité.', badge: '01' },
-    { title: 'Créez vos workflows', desc: 'Automatisez versements, validations et rappels.', badge: '02' },
-    { title: 'Suivez et optimisez', desc: 'Surveillez en temps réel et laissez l’IA suggérer les améliorations.', badge: '03' },
-  ]
-  return (
-    <section id="how" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">Mis en place en minutes, pas en mois</h2>
-            <p className="mt-4 text-gray-600">Évitez les déploiements interminables. RetraiteFlow s’adapte à votre organisation avec des étapes guidées.</p>
-            <div className="mt-8 space-y-6">
-              {steps.map((s) => (
-                <div key={s.title} className="relative p-5 rounded-2xl border border-gray-200 bg-white shadow-sm">
-                  <span className="absolute -top-3 left-5 text-xs font-semibold bg-gray-900 text-white px-2 py-1 rounded-full">{s.badge}</span>
-                  <h3 className="text-lg font-semibold text-gray-900">{s.title}</h3>
-                  <p className="mt-1 text-sm text-gray-600">{s.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative">
-            <div className="aspect-video rounded-2xl border border-gray-200 overflow-hidden shadow-lg bg-gradient-to-br from-blue-50 via-indigo-50 to-cyan-50" />
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent" />
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function Pricing() {
-  const tiers = [
-    { name: 'Starter', price: 'Gratuit', sub: 'Pour démarrer et tester', features: ['Jusqu’à 3 workflows', 'Versements de base', 'Support e‑mail'] },
-    { name: 'Growth', price: '49 €/mois', sub: 'Pour les équipes en croissance', featured: true, features: ['Workflows illimités', 'Rapprochement IA', 'Support prioritaire', 'SSO + rôles'] },
-    { name: 'Scale', price: 'Contact', sub: 'Pour la grande échelle', features: ['Limites personnalisées', 'Succès dédié', 'Options on‑premise'] },
-  ]
-  return (
-    <section id="pricing" className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">Tarification claire, valeur immédiate</h2>
-          <p className="mt-3 text-gray-600">Commencez gratuitement. Passez à la version supérieure quand vous voulez.</p>
-        </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {tiers.map((t) => (
-            <div key={t.name} className={`rounded-2xl border ${t.featured ? 'border-gray-900' : 'border-gray-200'} bg-white p-6 shadow-sm`}> 
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-gray-900">{t.name}</h3>
-                {t.featured && <span className="text-xs bg-gray-900 text-white px-2 py-1 rounded-full">Le plus populaire</span>}
-              </div>
-              <div className="mt-4 text-3xl font-semibold">{t.price}</div>
-              <p className="text-sm text-gray-600 mt-1">{t.sub}</p>
-              <div className="mt-6 space-y-2">
-                {t.features.map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-sm text-gray-700"><CheckCircle2 className="h-4 w-4 text-emerald-600" /> {f}</div>
-                ))}
-              </div>
-              <a href="#cta" className={`mt-6 inline-flex w-full items-center justify-center gap-2 px-4 py-2 rounded-lg border transition-colors ${t.featured ? 'bg-gray-900 text-white border-gray-900 hover:bg-black' : 'border-gray-200 hover:bg-gray-50'}`}>
-                Choisir {t.name}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+        <motion.div variants={stagger} initial="hidden" animate="show" className="grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7">
+            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 text-xs font-medium bg-white/70 backdrop-blur px-3 py-1 rounded-full w-max border border-white/60 shadow-sm">
+              <Sparkles className="h-4 w-4 text-indigo-600" />
+              <span>Développeur full stack • Narration produit</span>
+            </motion.div>
+            <motion.h1 variants={fadeUp} className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900">
+              Je crée des expériences qui racontent une histoire
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600"> pour le web moderne</span>
+            </motion.h1>
+            <motion.p variants={fadeUp} className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl">
+              Créateur de contenu et formateur en technologies, j’aide les marques et les talents à concevoir des produits pédagogiques et des interfaces mémorables.
+            </motion.p>
+            <motion.div variants={fadeUp} className="mt-6 flex flex-col sm:flex-row gap-3">
+              <a href="#projects" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-gray-900 text-white hover:bg-black transition-colors">
+                Voir mes projets <ArrowRight className="h-4 w-4" />
               </a>
-            </div>
-          ))}
-        </div>
+              <a href="#contact" className="inline-flex items-center justify-center px-5 py-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50">
+                Me contacter
+              </a>
+            </motion.div>
+            <motion.div variants={fadeUp} className="mt-6 flex items-center gap-4 text-sm text-gray-600">
+              <a className="flex items-center gap-2 hover:text-gray-900" href="https://github.com/" target="_blank" rel="noreferrer"><Github className="h-4 w-4" /> GitHub</a>
+              <a className="flex items-center gap-2 hover:text-gray-900" href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><Linkedin className="h-4 w-4" /> LinkedIn</a>
+              <a className="flex items-center gap-2 hover:text-gray-900" href="https://youtube.com/" target="_blank" rel="noreferrer"><Youtube className="h-4 w-4" /> YouTube</a>
+              <a className="flex items-center gap-2 hover:text-gray-900" href="https://x.com/" target="_blank" rel="noreferrer"><Twitter className="h-4 w-4" /> Twitter</a>
+            </motion.div>
+          </div>
+          <div className="lg:col-span-5">
+            <motion.div variants={fadeUp} className="relative aspect-[4/3] rounded-2xl border border-gray-200 overflow-hidden bg-white shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-violet-50 to-fuchsia-50" />
+              <div className="relative z-10 h-full w-full grid grid-cols-3 gap-3 p-4">
+                <div className="col-span-2 rounded-xl bg-white border border-gray-100 p-4 flex flex-col justify-between shadow-sm">
+                  <div>
+                    <div className="text-xs text-gray-500">Étude de cas</div>
+                    <div className="mt-1 font-semibold">Plateforme e-learning interactive</div>
+                  </div>
+                  <div className="mt-3 flex items-center gap-2 text-sm text-indigo-600">
+                    <Play className="h-4 w-4" /> Voir la démo
+                  </div>
+                </div>
+                <div className="rounded-xl bg-white border border-gray-100 p-4 shadow-sm">
+                  <div className="text-xs text-gray-500">Stack</div>
+                  <div className="mt-1 text-sm">React • FastAPI • MongoDB</div>
+                </div>
+                <div className="rounded-xl bg-white border border-gray-100 p-4 shadow-sm">
+                  <div className="text-xs text-gray-500">Rôle</div>
+                  <div className="mt-1 text-sm">Design • Dev • Motion</div>
+                </div>
+                <div className="col-span-2 rounded-xl bg-white border border-gray-100 p-4 shadow-sm">
+                  <div className="text-xs text-gray-500">Impact</div>
+                  <div className="mt-1 text-sm">+38% d’engagement sur les cours</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
 }
 
-function FAQ() {
-  const faqs = [
-    { q: 'RetraiteFlow est‑il sécurisé ?', a: 'Oui. Chiffrement bancaire, SSO, SAML, journaux d’audit et conformité SOC 2 Type II.' },
-    { q: 'Faut‑il des développeurs pour le paramétrer ?', a: 'Non. La plupart des clients se connectent et sont opérationnels en moins d’une heure.' },
-    { q: 'Puis‑je annuler à tout moment ?', a: 'Bien sûr. Vous pouvez changer d’offre ou résilier à tout moment, sans frais cachés.' },
-    { q: 'Gérez‑vous les multi‑devises ?', a: 'Oui. Multi‑devises pour versements, rapprochements et reporting.' },
+function SectionTitle({ eyebrow, title, subtitle }) {
+  return (
+    <div className="text-center max-w-2xl mx-auto">
+      {eyebrow && <div className="text-xs font-medium tracking-wider uppercase text-indigo-600">{eyebrow}</div>}
+      <h2 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">{title}</h2>
+      {subtitle && <p className="mt-3 text-gray-600">{subtitle}</p>}
+    </div>
+  )
+}
+
+function Projects() {
+  const items = [
+    { title: 'Studio vidéo interactif', tag: 'Produit', desc: 'Outils live + chapitrage automatique + templates.', impact: '+120k vues/mois', stack: 'React, FFmpeg, WebAssembly' },
+    { title: 'Plateforme de cours', tag: 'Éducation', desc: 'Progression, évaluations, certification, analytics.', impact: '+18k apprenants', stack: 'React, FastAPI, MongoDB' },
+    { title: 'Kit narration produit', tag: 'Design', desc: 'Composants UI animés pour raconter des features.', impact: '-30% time-to-ship', stack: 'Tailwind, Framer Motion' },
+    { title: 'Podcast tech', tag: 'Média', desc: 'Site + flux RSS + générateur de shorts auto.', impact: 'Top 10 FR Cat. Tech', stack: 'Next.js, Edge Functions' },
+    { title: 'SaaS créateurs', tag: 'Growth', desc: 'Automatisation factures, paiement, sponsors.', impact: '+45% revenu récurrent', stack: 'Stripe, Webhooks' },
+    { title: 'Boîte à outils IA', tag: 'R&D', desc: 'Assistants pour scripts, sous-titres, résumés.', impact: 'x3 vitesse prod', stack: 'OpenAI, Whisper' },
   ]
   return (
-    <section id="faq" className="py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 text-center">Questions fréquentes</h2>
-        <div className="mt-10 divide-y divide-gray-200 border border-gray-200 rounded-2xl overflow-hidden">
-          {faqs.map((f) => (
-            <details key={f.q} className="group">
-              <summary className="cursor-pointer list-none p-5 flex items-center justify-between">
-                <span className="font-medium text-gray-900">{f.q}</span>
-                <span className="text-gray-400 group-open:rotate-180 transition-transform">⌄</span>
-              </summary>
-              <div className="px-5 pb-5 text-gray-600 text-sm">{f.a}</div>
-            </details>
+    <section id="projects" className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionTitle eyebrow="Réalisations" title="Projets sélectionnés" subtitle="Une approche orientée impact, du concept à la livraison." />
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((p, idx) => (
+            <motion.div key={p.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ delay: idx * 0.05, duration: 0.5 }} className="group relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md transition-all">
+              <div className="text-xs text-indigo-600 font-medium">{p.tag}</div>
+              <div className="mt-2 text-lg font-semibold text-gray-900">{p.title}</div>
+              <p className="mt-2 text-sm text-gray-600">{p.desc}</p>
+              <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                <div className="rounded-lg border border-gray-200 p-3">Impact <span className="font-medium text-gray-900">{p.impact}</span></div>
+                <div className="rounded-lg border border-gray-200 p-3">Stack <span className="font-medium text-gray-900">{p.stack}</span></div>
+              </div>
+              <div className="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-transparent group-hover:ring-indigo-200 transition" />
+            </motion.div>
           ))}
         </div>
       </div>
@@ -240,23 +167,144 @@ function FAQ() {
   )
 }
 
-function CTA() {
+function Courses() {
+  const items = [
+    { icon: BookOpen, title: 'Architecture front‑end moderne', level: 'Intermédiaire', hours: '8h', outcome: 'Pattern thinking, performances, accessibilité' },
+    { icon: Code2, title: 'Full‑stack avec React & FastAPI', level: 'Avancé', hours: '10h', outcome: 'API, Auth, DB, déploiement' },
+    { icon: Sparkles, title: 'Motion & narration avec Framer Motion', level: 'Tous niveaux', hours: '6h', outcome: 'Micro‑interactions, scénographie, story beats' },
+  ]
   return (
-    <section id="cta" className="py-20 bg-gradient-to-br from-gray-900 via-gray-900 to-black text-white relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(600px_200px_at_top_right,rgba(59,130,246,0.25),transparent)]" />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Prêt à automatiser votre gestion retraite ?</h2>
-        <p className="mt-3 text-gray-300">Lancez votre essai gratuit aujourd’hui et mesurez le temps gagné dès la première semaine.</p>
+    <section id="courses" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionTitle eyebrow="Formations" title="Apprenez avec moi" subtitle="Des parcours concrets, orientés pratique et livrables réels." />
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {items.map((c, idx) => (
+            <motion.div key={c.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.05 }} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white flex items-center justify-center shadow-md">
+                <c.icon className="h-5 w-5" />
+              </div>
+              <div className="mt-4 text-lg font-semibold text-gray-900">{c.title}</div>
+              <div className="mt-1 text-sm text-gray-600">{c.level} • {c.hours}</div>
+              <p className="mt-2 text-sm text-gray-600">{c.outcome}</p>
+              <a href="#contact" className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-indigo-700 hover:text-indigo-900">Recevoir le programme <ArrowRight className="h-4 w-4" /></a>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ContentHub() {
+  const items = [
+    { icon: Youtube, title: 'Chaîne YouTube', stat: '52k abonnés', desc: 'Tutoriels, études de cas et formats courts sur le dev & le design.' },
+    { icon: Newspaper, title: 'Newsletter', stat: '12k lecteurs', desc: 'Une lettre hebdo sur la création de contenu tech et le produit.' },
+    { icon: Mic2, title: 'Podcast', stat: 'Top 10 FR', desc: 'Entretiens avec des makers et CTO sur la pédagogie et la stratégie.' },
+  ]
+  return (
+    <section id="content" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionTitle eyebrow="Contenu" title="Apprendre, partager, inspirer" subtitle="Des formats pédagogiques multi‑plateformes, avec une touche narrative." />
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {items.map((i, idx) => (
+            <motion.div key={i.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.05 }} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm hover:shadow-md">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 text-white flex items-center justify-center shadow-md">
+                <i.icon className="h-5 w-5" />
+              </div>
+              <div className="mt-4 text-lg font-semibold text-gray-900">{i.title}</div>
+              <div className="text-sm text-gray-600">{i.stat}</div>
+              <p className="mt-2 text-sm text-gray-600">{i.desc}</p>
+              <a href="#contact" className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-gray-900">Proposer une collaboration <ArrowRight className="h-4 w-4" /></a>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function About() {
+  const bullets = [
+    '10+ ans d’expérience entre produit, dev et pédagogie',
+    'Approche narrative: chaque feature est une scène',
+    'Focus accessibilité, performance et valeur métier',
+  ]
+  return (
+    <section id="about" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <SectionTitle eyebrow="À propos" title="Une pédagogie au service du produit" subtitle="Je conçois des expériences d’apprentissage qui révèlent la valeur de votre technologie." />
+          <ul className="mt-6 space-y-3 text-sm text-gray-700">
+            {bullets.map((b) => (
+              <li key={b} className="flex items-start gap-3"><Star className="h-4 w-4 text-amber-500 mt-0.5" /> {b}</li>
+            ))}
+          </ul>
+          <a href="#contact" className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-black">Parler de votre projet <ArrowRight className="h-4 w-4" /></a>
+        </div>
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative aspect-[4/3] rounded-2xl border border-gray-200 overflow-hidden bg-gradient-to-br from-indigo-50 via-violet-50 to-fuchsia-50">
+          <div className="absolute inset-0 grid grid-cols-6 gap-3 p-4">
+            <div className="col-span-4 rounded-xl bg-white border border-gray-100 p-4 shadow-sm">
+              <div className="text-xs text-gray-500">Workshops</div>
+              <div className="mt-1 font-semibold">Design Systems vivants</div>
+              <div className="mt-3 text-sm text-gray-600">Du storybook aux composants animés orientés narration.</div>
+            </div>
+            <div className="col-span-2 rounded-xl bg-white border border-gray-100 p-4 shadow-sm">
+              <div className="text-xs text-gray-500">Certification</div>
+              <div className="mt-1 text-sm">Formateur agréé</div>
+            </div>
+            <div className="col-span-2 rounded-xl bg-white border border-gray-100 p-4 shadow-sm">
+              <div className="text-xs text-gray-500">Formats</div>
+              <div className="mt-1 text-sm">Vidéo, live, cohortes</div>
+            </div>
+            <div className="col-span-4 rounded-xl bg-white border border-gray-100 p-4 shadow-sm">
+              <div className="text-xs text-gray-500">Résultats</div>
+              <div className="mt-1 text-sm">+30% d’achèvement des cours</div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+function Testimonials() {
+  const quotes = [
+    { author: 'Clara, Head of Product', text: 'Une narration limpide. Les équipes ont compris la vision et livré plus vite.' },
+    { author: 'Mehdi, CTO', text: 'Il transforme des sujets complexes en expériences plaisantes et performantes.' },
+  ]
+  return (
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionTitle eyebrow="Témoignages" title="Ce que disent les clients" />
+        <div className="mt-10 grid md:grid-cols-2 gap-6">
+          {quotes.map((q, idx) => (
+            <motion.blockquote key={q.author} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.05 }} className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="flex items-start gap-3 text-gray-700"><Quote className="h-5 w-5 text-indigo-600" /> {q.text}</div>
+              <div className="mt-3 text-sm font-medium text-gray-900">{q.author}</div>
+            </motion.blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="py-20 bg-gray-900 text-white relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(600px_200px_at_top_right,rgba(99,102,241,0.25),transparent)]" />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Parlons de votre projet</h2>
+        <p className="mt-3 text-gray-300">Expliquez-moi vos objectifs. Je reviens vers vous sous 48h avec une proposition.</p>
         <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="#" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-gray-900 hover:bg-gray-100">
-            Créer un compte
-            <ArrowRight className="h-4 w-4" />
+          <a href="mailto:hello@example.com" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-gray-900 hover:bg-gray-100">
+            <Mail className="h-4 w-4" /> Envoyer un e‑mail
           </a>
-          <a href="/test" className="inline-flex items-center justify-center px-5 py-3 rounded-lg border border-white/20 hover:bg-white/10">
-            Tester la connectivité
+          <a href="#" className="inline-flex items-center justify-center px-5 py-3 rounded-lg border border-white/20 hover:bg-white/10">
+            Télécharger le media kit
           </a>
         </div>
-        <div className="mt-4 text-xs text-gray-400">Sans carte bancaire • 14 jours d’essai</div>
+        <div className="mt-4 text-xs text-gray-400">Disponibilités: 2 créneaux par mois • Paris / Remote</div>
       </div>
     </section>
   )
@@ -267,15 +315,15 @@ function Footer() {
     <footer className="py-10 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
-          <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-500" />
-          <span className="text-sm font-semibold">RetraiteFlow</span>
+          <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-600" />
+          <span className="text-sm font-semibold">Alex Marchand</span>
         </div>
-        <div className="text-sm text-gray-500">© {new Date().getFullYear()} RetraiteFlow. Tous droits réservés.</div>
         <div className="flex items-center gap-5 text-sm text-gray-600">
-          <a href="#" className="hover:text-gray-900">Confidentialité</a>
-          <a href="#" className="hover:text-gray-900">Conditions</a>
-          <a href="#" className="hover:text-gray-900">Sécurité</a>
+          <a href="https://github.com/" target="_blank" rel="noreferrer" className="hover:text-gray-900">GitHub</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="hover:text-gray-900">LinkedIn</a>
+          <a href="https://youtube.com/" target="_blank" rel="noreferrer" className="hover:text-gray-900">YouTube</a>
         </div>
+        <div className="text-sm text-gray-500">© {new Date().getFullYear()} Tous droits réservés.</div>
       </div>
     </footer>
   )
@@ -283,7 +331,7 @@ function Footer() {
 
 export default function App() {
   React.useEffect(() => {
-    // Défilement fluide pour les liens d'ancrage
+    // Défilement fluide pour les ancres
     const handler = (e) => {
       const target = e.target
       if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
@@ -301,11 +349,12 @@ export default function App() {
     <div className="min-h-screen bg-white text-gray-900">
       <Navbar />
       <Hero />
-      <Features />
-      <HowItWorks />
-      <Pricing />
-      <FAQ />
-      <CTA />
+      <Projects />
+      <Courses />
+      <ContentHub />
+      <About />
+      <Testimonials />
+      <Contact />
       <Footer />
     </div>
   )
